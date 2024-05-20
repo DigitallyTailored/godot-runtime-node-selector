@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm2hv68a6hdnx"]
+
+[ext_resource type="Script" path="res://dummy_add_object.gd" id="1_5nf40"]
+[ext_resource type="PackedScene" uid="uid://bir52feueu1c" path="res://RuntimeSelector.tscn" id="2_xbx3g"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3dgwj"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wjcjp"]
+sky_material = SubResource("ProceduralSkyMaterial_3dgwj")
+
+[sub_resource type="Environment" id="Environment_jbmsv"]
+background_mode = 2
+sky = SubResource("Sky_wjcjp")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_p27eq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_i08sq"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_5nf40")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jbmsv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = SubResource("BoxMesh_p27eq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("SphereMesh_i08sq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.66319)
+
+[node name="RuntimeSelector" parent="." instance=ExtResource("2_xbx3g")]
